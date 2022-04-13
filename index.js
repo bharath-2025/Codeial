@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 const port = 8000;
 
-
+// use express router
+// Creating a middleware to require the routes index.js
+app.use('/',require('./routes/index'));
 
 
 
