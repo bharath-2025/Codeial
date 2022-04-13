@@ -6,6 +6,9 @@ const port = 8000;
 // Creating a middleware to require the routes index.js
 app.use('/',require('./routes/index'));
 
+// setting up the view engine
+app.set('view engine','ejs');
+app.set('views','./views');
 
 
 app.listen(port,(err)=>{
