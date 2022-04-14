@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const port = 8000;
+const expressLayouts = require('express-ejs-layouts');
+app.use(expressLayouts);
 
 // use express router
 // Creating a middleware to require the routes index.js
