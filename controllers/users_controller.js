@@ -13,6 +13,11 @@ module.exports.home = function(req,res){
 
 // render the sign-in page
 module.exports.signin = function(req,res){
+    // redirecting to profile page if the user is already signin
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
+
     return res.render('signIn',{
         title: "Sign-In"
     })
@@ -20,6 +25,10 @@ module.exports.signin = function(req,res){
 
 // render the sign-up page
 module.exports.signup = function(req,res){
+    // redirecting to profile page if the user is already signin
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile');
+    }
     return res.render('signup',{
         title:"Sign Up"
     })
@@ -55,11 +64,11 @@ module.exports.create = function(req,res){
 
 // signIn and create a session for the user
 module.exports.createSession = function(req,res){
-    User.findOne({email:req.body.email,password:req.body.password},function(err,user){
-        if(!user){
-            return res.redirect('back');
-        }
+    return res.redirect('/');
+}
 
-        return res.redirect('/users/profile');
-    })
+module.exports.destroySession = function(req,res){
+    // req.logut is handlesd by the passport.Js
+    req.logout();
+    return res.redirect('/');
 }
