@@ -2,12 +2,23 @@ const express = require('express');
 const app = express();
 const port = 8000;
 
+//Reading through the POST requests we have create a midlleware. This is very important. Wasted my whole time,pls dont forget.
+app.use(express.urlencoded({extended:true}));
+// importing or requiring the database
+const db = require('./config/mongoose');
+
+
+// setting up the cookie parser
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());   // middleware
+
 //setting up the layouts
 const expressLayouts = require('express-ejs-layouts');
 app.use(expressLayouts);
 // extract styles and scripts from sub pages into the layouts.
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true);
+
 
 
 
