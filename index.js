@@ -2,6 +2,16 @@ const express = require('express');
 const app = express();
 const port = 8000;
 
+// Working with sass
+const sassMiddleware = require('node-sass-middleware');
+app.use(sassMiddleware({
+    src: './assets/scss',
+    dest: './assets/css',
+    debug: true,
+    outputStyle: 'extended',
+    prefix: '/css'
+}))
+
 //Reading through the POST requests we have create a midlleware. This is very important. Wasted my whole time,pls dont forget.
 app.use(express.urlencoded({extended:true}));
 

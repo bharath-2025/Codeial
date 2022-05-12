@@ -1,11 +1,13 @@
 <header>
-
+    <div id="details">
+        <h1>Welcome to Codeial</h1>
+    </div>
     <ul>
         <% if(locals.user) { %>
             <li>
                 <a href="/users/profile"><%= user.name %></a>
             </li>
-            <l1>
+            <li>
                 <a href="/users/signout">Sign Out</a>
             </li>
         <% } else{ %>
