@@ -9,4 +9,17 @@
         </textarea>
         <input type="submit" value="POST">
     </form>
+    <div>
+        <ul>
+            <% for(post of posts) { %>
+                <li>
+                    <p>
+                        <%= post.content %><span> --->@user </span>
+                        <%= post.user.name %>
+                    </p>
+                    
+                </li>
+            <% } %>
+        </ul>
+    </div>
 </section>
