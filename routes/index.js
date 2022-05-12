@@ -12,6 +12,6 @@ router.get('/',homeController.home);
 // syntax:
 // router.use('/routerName',require('./route file'));
 router.use('/users',require('./users'));
-
+router.use('/posts',require('./posts'));
 
 module.exports = router;
