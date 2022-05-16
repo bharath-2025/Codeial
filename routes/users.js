@@ -4,7 +4,7 @@ const router = express.Router();
 
 // accessing the users_controller
 const usersController = require('../controllers/users_controller');
-router.get('/profile',passport.checkAuthentication,usersController.profile);
+router.get('/profile/:id',passport.checkAuthentication,usersController.profile);
 router.get('/',usersController.home);
 
 // routes request for the SignIn and SignUP pages
