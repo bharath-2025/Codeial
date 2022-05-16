@@ -1,0 +1,11 @@
+<li>
+    <p>
+        <%= comment.content %>
+        <span>Commented by @<%= comment.user.name %></span>
+        <!-- Delete button has to be visible only when the user logged in and if the logged in user commented any comments-->
+        <% if(locals.user && locals.user.id == comment.user.id) {%>
+            <a href="comments/destroy/<%= comment._id %>">X</a>
+        <% } %>
+        <br>
+    </p>
+</li>
