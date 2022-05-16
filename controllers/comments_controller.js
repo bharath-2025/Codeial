@@ -22,3 +22,23 @@ module.exports.create = function(req,res){
         }
     })
 }
+
+// Creating an Action to delete a comment
+module.exports.destroy = function(req,res){
+    //checking whether the comment is existed in the database
+    Comment.findById(req.params.id,function(err,comment){
+
+        if(comment.user == req.user.id){
+            // fetching the postID to remove comment id from the comments array inside the postSchema.
+            let postId = comment.post;
+            comment.remove();
+            // deleting the commentId inside the comments array which was deleted.
+            Post.findByIdAndUpdate(postId ,{ $pull: {comments: req.params.id} },function(){
+                return res.redirect('back');
+            })
+        }else{
+            return res.redirect('back');
+        }
+
+    });
+}
