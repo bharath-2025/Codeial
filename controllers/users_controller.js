@@ -11,6 +11,19 @@ module.exports.profile = function(req,res){
     
 }
 
+// Creating an action to update the user Profile page.
+module.exports.update = function(req,res){
+    //checking whether loggedIn user and the id passed as params are same then only it will update. So that the logged in user cant feddle with other profie page through inspect method from browser.
+    if(req.user.id == req.params.id){
+        User.findByIdAndUpdate(req.params.id, {name:req.body.name, email:req.body.email}, function(err,user){
+            return res.redirect('back'); 
+        });
+    }else {
+        // returning a HTTP status code if someone feddeled with the req.params through inspecting in browser.
+        return res.status(401).send("Unauthorized") ;
+    }
+}
+
 module.exports.home = function(req,res){
     res.end("<h1>User Home page</h1>")
 }

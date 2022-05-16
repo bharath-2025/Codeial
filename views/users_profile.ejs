@@ -1,4 +1,26 @@
     <link rel="stylesheet" href="/css/userprofile.css">
-    <h1>Codeial / <%=profile_user.name%> Page</h1>
 
-    <p>Email : <%= profile_user.email %></p>
+
+    <!-- Giving Authorization to update his/her profile only if him/her has logged in. They cant update others profile page.-->
+    <!-- locals.user is the object which is created during passport authentication -->
+    <!-- If that locals.user.id == profile_user.id getting through the user route are same then, the Authorized to update his/her profile page. -->
+    <% if(locals.user.id == profile_user.id) { %>
+        <!-- if user matches then show thw form -->
+        <h3>Update Your details......</h3>
+        <form action="/users/update/<%= profile_user.id %>" method="post">
+            <input type="text" name="name" placeholder="Your Name" required ><br><br>
+            <input type="email" name="email" placeholder="Your Email" required><br><br>
+            <input type="submit" value="update">
+        </form>
+
+        <h1>Codeial / <%=profile_user.name%> Page</h1>
+        <p>Email : <%= profile_user.email %></p>
+        <a href="/">Back to Home</a>
+
+    <% }else { %>
+        <!-- Else show the profile info -->
+        <h1>Codeial / <%=profile_user.name%> Page</h1>
+        <p>Email : <%= profile_user.email %></p>
+        <a href="/">Back to Home</a>
+        
+    <% } %>
