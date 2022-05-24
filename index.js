@@ -70,6 +70,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
 
+
+// Requiring the library 'connect-flash' for displaying flash-messages.
+// middleware has to be set after the session and iam using a custom middleware to and the flash message to the locals of res.
+const customMware = require('./config/middleware');
+const flash = require('connect-flash');
+app.use(flash());
+app.use(customMware.setFlash);
+
 // use express router
 // Creating a middleware to require the routes index.js
 app.use('/',require('./routes/index'));
