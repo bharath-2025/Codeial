@@ -6,8 +6,11 @@ module.exports.create = function(req,res){
         content: req.body.content,
         user: req.user._id        // fetching the identity of the signedIn user that we have created during the passport Authentication
     },function(err,post){
-        if(err){console.log("Error in creating a post"); return ;}
-
+        if(err){
+            console.log("Error in creating a post"); 
+            return ;
+        }
+        req.flash('success','Post Published');
         return res.redirect('back');
     });
 }
@@ -22,9 +25,11 @@ module.exports.destroy = function(req,res){
 
             // deleting posts will result in deleting all the comments inside that post also. So we are deleting all the comments of that post.
             Comment.deleteMany({post: req.params.id},function(err){
+                req.flash('success','Post Deleted!');
                 return res.redirect('back');
             })
         }else{
+            req.flash('error','You Cannot delete this Post!');
             return res.redirect('back');
         }
 
